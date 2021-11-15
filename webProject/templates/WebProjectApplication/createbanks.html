@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block title %} Банки {% endblock %}
+{% block content %}
+{% load static %}
+
+{% if request.user.is_staff  %}
+
+<form method="POST" action="">
+{% csrf_token %}
+    <p>
+        <label>Введите код банка</label><br>
+        <input type="number" name="id" required/>
+    </p>
+    <p>
+        <label>Введите название банка</label><br>
+        <input type="text" name="namebanka" required/>
+    </p>
+    <input type="submit" value="Сохранить">
+</form>
+
+{% endif %}
+
+{% if newBanks.count > 0 %}
+<table class="table table-hover">
+    <thead>
+      <tr>
+          <th scope="col"> Код банка </th>
+          <th scope="col"> Наименование банка </th>
+          {% if request.user.is_staff  %}
+          <th scope="col"> Изменить </th>
+          <th scope="col"> Удалить </th>
+          {% endif %}
+      </tr>
+    </thead>
+    <tbody>
+     {% for newBank in newBanks %}
+      <tr>
+          <td>{{ newBank.id }} </td>
+          <td>{{ newBank.namebanka }}</td>
+          {% if request.user.is_staff  %}
+          <td><a href="{% url 'editbanks' id=newBank.id %}">Изменить</a></td>
+          <td><a href="{% url 'deletebanks' id=newBank.id %}">Удалить</a></td>
+          {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+    {% endif %}
+</table>
+{% endblock %}

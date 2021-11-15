@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}Авторизация{% endblock %}
+{% block content %}
+    <h1>Авторизация</h1>
+    {% if form.errors %}
+        <p>
+            Не был найден пароль или логин. Попробуйте еще раз.
+        </p>
+    {% else %}
+        <p>Пожалуйста, используйте формы ниже для авторизации</p>
+    {% endif %}
+    <div class="login-form">
+        <form action="{% url 'login' %}" method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}"/>
+            <p><input type="submit" value="Log-in"></p>
+        </form>
+    </div>
+{% endblock %}

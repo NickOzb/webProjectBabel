@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+
+    {% load static%}
+
+
+
+    <title>{% block title %} Складской учет {% endblock %}</title>
+       <link rel="shortcut icon" href="static/images/nothalyalet.png" type="image/png">
+</head>
+<body style="background-color:#B0E0E6">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#87CEEB">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'index' %}">Складкой учет</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Главная</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'createbanks' %}">Банки</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'createtovar' %}">Товары</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'createkategory' %}">Категории товара</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'createnalog' %}">Налоги</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'createdvizhenie' %}">Движение товара</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'createorg' %}">Организации</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'createnakladnie' %}">Накладные</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'createpodr' %}">Подразделения</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'createtaks' %}">Таксировка</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'createost' %}">Остатки</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container">
+{% block content %}
+
+{% endblock %}
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</html>

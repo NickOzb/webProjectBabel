@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% block title %} Организации {% endblock %}
+{% block content %}
+{% load static %}
+
+{% if request.user.is_staff  %}
+
+<form method="POST" action="">
+{% csrf_token %}
+{{ form.as_p }}
+
+    <input type="submit" value="Сохранить" >
+</form>
+
+
+{% endif %}
+
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+
+      <th scope="col">Код организации</th>
+      <th scope="col">Наименование</th>
+      <th scope="col">Код банка</th>
+      <th scope="col">Лицевой счет</th>
+      <th scope="col">Адрес</th>
+      <th scope="col">ФИО руководителя</th>
+      <th scope="col">Телефон</th>
+      {% if request.user.is_staff  %}
+      <th scope="col">Изменить</th>
+      <th scope="col">Удалить</th>
+      {% endif %}
+
+    </tr>
+  </thead>
+  <tbody>
+   {% for newOrg in Orgs %}
+    <tr>
+
+    <td>{{ newOrg.id }} </td>
+    <td>{{ newOrg.nameorg }}</td>
+    <td>{{ newOrg.kodbanka }}</td>
+    <td>{{ newOrg.schetorg }}</td>
+    <td>{{ newOrg.adress }} </td>
+    <td>{{ newOrg.fioruk }} </td>
+    <td>{{ newOrg.phone }} </td>
+    {% if request.user.is_staff  %}
+    <td><a href = "{% url 'editorg' id=newOrg.id %}">Изменить</a></td>
+    <td><a href = "{% url 'deleteorg' id=newOrg.id %}">Удалить</a></td>
+    {% endif %}
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

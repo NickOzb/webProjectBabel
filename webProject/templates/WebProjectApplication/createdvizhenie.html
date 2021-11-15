@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block title %} Движение товара {% endblock %}
+{% block content %}
+{% load static %}
+
+{% if request.user.is_staff  %}
+
+<form method="POST" action="">
+{% csrf_token %}
+{{ form.as_p }}
+
+    <input type="submit" value="Сохранить" >
+</form>
+
+{% endif %}
+
+
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+
+      <th scope="col">Артикул товара</th>
+      <th scope="col">Кол-во товара</th>
+      <th scope="col">Цена</th>
+      {% if request.user.is_staff  %}
+      <th scope="col">Изменить</th>
+      <th scope="col">Удалить</th>
+      {% endif %}
+
+    </tr>
+  </thead>
+  <tbody>
+   {% for newDvizhenie in Dvizhenies %}
+    <tr>
+
+    <td>{{ newDvizhenie.articul }} </td>
+    <td>{{ newDvizhenie.kolvotovara }}</td>
+    <td>{{ newDvizhenie.cena }}</td>
+    {% if request.user.is_staff  %}
+    <td><a href = "{% url 'editdvizhenie' id=newDvizhenie.id %}">Изменить</a></td>
+    <td><a href = "{% url 'deletedvizhenie' id=newDvizhenie.id %}">Удалить</a></td>
+    {% endif %}
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block title %} Таксировка {% endblock %}
+{% block content %}
+{% load static %}
+
+{% if request.user.is_staff  %}
+
+<form method="POST" action="">
+{% csrf_token %}
+{{ form.as_p }}
+
+    <input type="submit" value="Сохранить" >
+</form>
+
+{% endif %}
+
+
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+
+      <th scope="col">Номер накладной</th>
+      <th scope="col">Код налога</th>
+      <th scope="col">Сумма налога</th>
+      {% if request.user.is_staff  %}
+      <th scope="col">Изменить</th>
+      <th scope="col">Удалить</th>
+      {% endif %}
+
+    </tr>
+  </thead>
+  <tbody>
+   {% for newTaks in Takss %}
+    <tr>
+
+    <td>{{ newTaks.nnakladnoy }} </td>
+    <td>{{ newTaks.kodnaloga }}</td>
+    <td>{{ newTaks.sumnaloga }}</td>
+    {% if request.user.is_staff  %}
+    <td><a href = "{% url 'edittaks' id=newTaks.id %}">Изменить</a></td>
+    <td><a href = "{% url 'deletetaks' id=newTaks.id %}">Удалить</a></td>
+    {% endif %}
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

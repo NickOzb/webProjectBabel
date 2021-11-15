@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% block title %} Остатки {% endblock %}
+{% block content %}
+{% load static %}
+
+{% if request.user.is_staff  %}
+
+<form method="POST" action="">
+{% csrf_token %}
+{{ form.as_p }}
+
+    <input type="submit" value="Сохранить" >
+</form>
+
+{% endif %}
+
+
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+
+      <th scope="col">Артикул</th>
+      <th scope="col">Средняя цена</th>
+      <th scope="col">Кол-во товара на начало месяца</th>
+      <th scope="col">Кол-во приход</th>
+      <th scope="col">Кол-во расход</th>
+      {% if request.user.is_staff  %}
+      <th scope="col">Изменить</th>
+      <th scope="col">Удалить</th>
+      {% endif %}
+
+    </tr>
+  </thead>
+  <tbody>
+   {% for newOst in Osts %}
+    <tr>
+
+    <td>{{ newOst.articul }} </td>
+    <td>{{ newOst.srcena }}</td>
+    <td>{{ newOst.kolvotovarananachalo }}</td>
+    <td>{{ newOst.kolvoprihod }}</td>
+    <td>{{ newOst.kolvorashod }}</td>
+    {% if request.user.is_staff  %}
+    <td><a href = "{% url 'editost' id=newOst.id %}">Изменить</a></td>
+    <td><a href = "{% url 'deleteost' id=newOst.id %}">Удалить</a></td>
+    {% endif %}
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

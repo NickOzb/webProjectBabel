@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+{% csrf_token %}
+{% load static %}
+{% if request.user.is_staff  %}
+<h4>Вы авторизованы как персонал или админ</h4>
+<H1>
+    Вы находитесь на сайте разработанному как курсовая работа<br>
+    Тема: "Складской учет"<br>
+    Разработчик студент группы ИС 19-3 Буераков Никита
+</H1>
+{% else %}
+<h4>Вы не авторизованы</h4>
+<h1>
+    Курсовая работа по дисциплине "Разработка клиент-серверных приложений"<br>
+    Разработал студент группы ИС 19-3 Буераков Никита<br>
+    Вариант №6. Складской учет
+</h1>
+{% endif %}
+{% if not request.user.is_authenticated  %}
+<a href="{% url 'login' %}" class="btn btn-warning">Авторизация</a>
+{% else %}
+<a href="{% url 'logout' %}" class="btn btn-danger">Выйти из системы</a>
+{% endif %}
+{% endblock %}
+

@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+{% block title %} Подразделения {% endblock %}
+{% block content %}
+{% load static %}
+
+{% if request.user.is_staff  %}
+
+<form method="POST" action="">
+{% csrf_token %}
+{{ form.as_p }}
+
+    <input type="submit" value="Сохранить" >
+</form>
+
+
+{% endif %}
+
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+
+      <th scope="col">Код склада</th>
+      <th scope="col">Название склада</th>
+      <th scope="col">ФИО складовщика</th>
+      {% if request.user.is_staff  %}
+      <th scope="col">Изменить</th>
+      <th scope="col">Удалить</th>
+      {% endif %}
+
+    </tr>
+  </thead>
+  <tbody>
+   {% for newPodr in Podrs %}
+    <tr>
+
+    <td>{{ newPodr.kodsklada }} </td>
+    <td>{{ newPodr.namesklada }}</td>
+    <td>{{ newPodr.fio }}</td>
+    {% if request.user.is_staff  %}
+    <td><a href = "{% url 'editpodr' id=newPodr.id %}">Изменить</a></td>
+    <td><a href = "{% url 'deletepodr' id=newPodr.id %}">Удалить</a></td>
+    {% endif %}
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}
